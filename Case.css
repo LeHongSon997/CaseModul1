@@ -1,0 +1,172 @@
+*{
+    box-sizing: border-box
+;
+}
+
+html {
+    min-height: 100vh;
+    font-family: sans-serif;
+
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(#eb87e9, azure);
+}
+
+.game-title {
+    color: #43008b;
+    font-family: 'Tangerine', cursive;
+/*font chữ hiển thị*/
+    font-weight: bolder;
+    /*độ dày chữ*/
+    text-align: center;
+/*sắp xếp nội dung theo chiều ngang, ở trung tâm*/
+    font-size: 6em;
+    /*cỡ chữ*/
+}
+
+.game-info-block {
+    grid-column: 1 / -1;
+    /*/chia cot va hang*/
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.game-info {
+    color: darkblue;
+    font-size: 2em;
+    font-family: 'Archivo Narrow', sans-serif;
+    letter-spacing: 2px;
+    /*khoang cach giữa các phần tử trong div*/
+}
+
+.game-container {
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    /*tạo bố cục lưới hàng 6 thẻ*/
+    grid-gap: 10px;
+    /*khoảng cách giữa các thẻ trong lưới*/
+    justify-content: center;
+    /*perspective: 500px;*/
+    /*tạo góc nhìn 3d cho thẻ*/
+}
+
+.block {
+    position: relative;
+    /*định vị tương đối cho block*/
+    cursor: auto;
+    height: 125px;
+    width: 125px;
+}
+
+.block-front {
+    background-color: black;
+    border-color: royalblue;
+    transform: rotateY(180deg);
+    /*xoay 180 độ*/
+}
+
+
+.block-value {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    transition: transform 100ms ease-in-out;
+    transform: scale(0.95);
+}
+
+.block-face {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    border-width: 1px;
+    border-style: solid;
+    overflow: hidden;
+    transition: transform 500ms ease-in-out;
+    backface-visibility: hidden;
+}
+
+.block.visible .block-back {
+    transform: rotateY(-180deg) scale(2);
+}
+
+.block.visible .block-front {
+    transform: rotateY(0);
+}
+
+
+.block-back {
+    background-color: black;
+    border-color: royalblue;
+    transform: rotateY(0);
+}
+
+
+.overlay-text {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: azure;
+    font-family: 'Dancing Script', cursive;
+    transition: background-color 500ms, font-size 500ms;
+}
+
+.overlay-text-small {
+    font-size: .3em;
+}
+
+.overlay-text.visible {
+    display: flex;
+    animation: overlay-grow 500ms forwards;
+}
+
+@keyframes dance {
+    0%, 100% {
+        transform: rotate(0)
+    }
+
+    25% {
+        transform: rotate(-30deg)
+    }
+
+    75% {
+        transform: rotate(30deg)
+    }
+}
+
+@keyframes overlay-grow {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+        font-size: 0;
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, .8);
+        font-size: 10em;
+    }
+}
+
+.image {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 505px;
+    height: 490px;
+    transition: transform 500ms ease-in-out;
+    z-index: 1;
+}
